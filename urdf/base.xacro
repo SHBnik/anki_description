@@ -17,13 +17,14 @@
             <cylinder radius="${radius}" length="0.0116739"/>
         </geometry>
       </collision>
-      <xacro:cylinder_inertial mass="0.005" radius="${radius}" length="0.01167"/>
+      <xacro:cylinder_inertial mass="1" radius="${radius}" length="0.01167"/>
     </link>
     <joint name="${link_name}_joint" type="continuous">
         <parent link="base_link"/>
         <child link="${link_name}"/>
         <xacro:insert_block name="origin"/>
         <axis xyz="0 0 1"/>
+        <dynamics friction="1" damping="0"/>
     </joint>
     <transmission name="${link_name}_transmission">
         <type>transmission_interface/SimpleTransmission</type>
@@ -35,32 +36,34 @@
             <mechanicalReduction>30</mechanicalReduction>
         </actuator>
     </transmission>
-    <!-- <gazebo reference="${link_name}">
+    <gazebo reference="${link_name}">
       <selfCollide>true</selfCollide>
-      <mu1 value="200.0"/>
-      <mu2 value="100.0"/>
-      <kp value="10000000.0"/>
-      <kd value="1.0"/>
-    </gazebo> -->
+      <mu1 value="1"/>
+      <mu2 value="1"/>
+      <kp value="1000000.0"/>
+      <kd value="1"/>
+      <fdir1 value="0 0 1"/>
+    </gazebo>
   </xacro:macro>
 
 <xacro:wheel link_name="front_left_wheel" radius="0.01314">
-  <origin xyz="0.03 0.024 -0.012" rpy="${-pi/2} 0 0"/>
+  <origin xyz="0.03 0.024 -0.013" rpy="${-pi/2} 0 0"/>
 </xacro:wheel>
 
 <xacro:wheel link_name="front_right_wheel" radius="0.01314">
-  <origin xyz="0.03 -0.024 -0.012" rpy="${-pi/2} 0 0"/>
+  <origin xyz="0.03 -0.024 -0.013" rpy="${-pi/2} 0 0"/>
 </xacro:wheel>
 
-<xacro:wheel link_name="rear_left_wheel" radius="0.008995">
-  <origin xyz="-0.017 0.024 -0.0151707" rpy="${-pi/2} 0 0"/>
+<xacro:wheel link_name="rear_left_wheel" radius="0.01314">
+  <origin xyz="-0.017 0.024 -0.013" rpy="${-pi/2} 0 0"/>
 </xacro:wheel>
 
-<xacro:wheel link_name="rear_right_wheel" radius="0.008995">
-  <origin xyz="-0.017 -0.024 -0.0151707" rpy="${-pi/2} 0 0"/>
+<xacro:wheel link_name="rear_right_wheel" radius="0.01314">
+  <origin xyz="-0.017 -0.024 -0.013" rpy="${-pi/2} 0 0"/>
 </xacro:wheel>
 
-<link name="left_belt">
+
+<!-- <link name="left_belt">
   <visual>
     <geometry>
       <mesh filename="package://anki_description/meshes/cozmo_belt.dae" />
@@ -84,11 +87,11 @@
   <parent link="base_link"/>
   <child link="right_belt"/>
   <origin xyz="0.00945088 -0.024 -0.0133211"/>
-</joint>
+</joint> -->
 
 <gazebo>
     <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
-        <updateRate>25.0</updateRate>
+        <updateRate>100.0</updateRate>
         <robotNamespace>/</robotNamespace>
         <leftFrontJoint>front_left_wheel_joint</leftFrontJoint>
         <rightFrontJoint>front_right_wheel_joint</rightFrontJoint>
@@ -97,8 +100,8 @@
         <wheelSeparation>0.048</wheelSeparation>
         <wheelDiameter>0.026281</wheelDiameter>
         <robotBaseFrame>base_footprint</robotBaseFrame>
-        <torque>0.1</torque>
-        <commandTopic>cmd_vel</commandTopic>
+        <torque>20</torque>
+        <commandTopic>vector/cmd_vel</commandTopic>
         <odometryTopic>odom</odometryTopic>
         <broadcastTF>true</broadcastTF>
         <odometryFrame>odom</odometryFrame>
@@ -107,5 +110,8 @@
         <covariance_yaw>0.001</covariance_yaw>
     </plugin>
 </gazebo>
+
+
+
 
 </robot>
