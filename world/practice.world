@@ -1,5 +1,16 @@
 <sdf version='1.6'>
   <world name='default'>
+
+    <physics type="ode">
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>50</iters>
+          <friction_model>cone_model</friction_model>
+        </solver>
+      </ode>
+    </physics>
+
     <light name='sun' type='directional'>
       <cast_shadows>1</cast_shadows>
       <pose frame=''>0 0 10 0 -0 0</pose>

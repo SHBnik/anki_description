@@ -2,8 +2,8 @@
 
   <arg name="robot_type" default="vector"/>
   <arg name="gazebo_gui" default="true"/>
-  <arg name="load_world" default="false"/>
-  <arg name="teleop" default="true"/>
+  <arg name="load_world" default="true"/>
+  <arg name="teleop" default="false"/>
 
   <!-- load model to parameter server and spwan for gazebo -->
   <arg name="model" default="$(find anki_description)/urdf/$(arg robot_type).xacro"/>

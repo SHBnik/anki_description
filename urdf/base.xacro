@@ -24,7 +24,6 @@
         <child link="${link_name}"/>
         <xacro:insert_block name="origin"/>
         <axis xyz="0 0 1"/>
-        <dynamics friction="1" damping="0"/>
     </joint>
     <transmission name="${link_name}_transmission">
         <type>transmission_interface/SimpleTransmission</type>
@@ -42,7 +41,6 @@
       <mu2 value="1"/>
       <kp value="1000000.0"/>
       <kd value="1"/>
-      <fdir1 value="0 0 1"/>
     </gazebo>
   </xacro:macro>
 
