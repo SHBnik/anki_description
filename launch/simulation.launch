@@ -8,7 +8,7 @@
   <!-- load model to parameter server and spwan for gazebo -->
   <arg name="model" default="$(find anki_description)/urdf/$(arg robot_type).xacro"/>
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.0 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-z 0.8 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
 
   <!-- state publishers -->
   <rosparam file="$(find anki_description)/config/$(arg robot_type)_config.yaml" command="load"/>
