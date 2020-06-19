@@ -1,5 +1,5 @@
 <launch>
-    <arg name="put_robot_in_world" default="false" />
+    <arg name="put_robot_in_world" default="true" />
     <arg name="put_robot_in_world_package" default="" />
     <arg name="put_robot_in_world_launch" default="" />
 
@@ -9,9 +9,10 @@
     <arg name="roll" default="0.0"/>
     <arg name="pitch" default="0.0"/>
     <arg name="yaw" default="0.0"/>
+    <arg name="world" default="sample1"/>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find anki_description)/world/cone_friction_world_model.world"/>
+        <arg name="world_name" value="$(find anki_description)/world/$(arg world).world"/>
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
@@ -20,7 +21,7 @@
     </include>
 
     <group if="$(arg put_robot_in_world)">
-        <include file="$(eval find(put_robot_in_world_package) + '/launch/' + put_robot_in_world_launch)">
+        <include file="$(find anki_description)/launch/put_robot_in_world.launch">
             <arg name="x" value="$(arg x)" />
             <arg name="y" value="$(arg y)" />
             <arg name="z" value="$(arg z)" />
