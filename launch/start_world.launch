@@ -4,7 +4,7 @@
     <arg name="put_robot_in_world_launch" default="" />
 
     <arg name="x" default="0.0" />
-    <arg name="y" default="0.0" />
+    <arg name="y" default="1.5" />
     <arg name="z" default="0.0" />
     <arg name="roll" default="0.0"/>
     <arg name="pitch" default="0.0"/>
